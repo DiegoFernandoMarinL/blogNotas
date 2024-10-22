@@ -1,21 +1,32 @@
-import express, { json } from 'express';
-import cors from 'cors';
+const express = require('express');
+const cors = require('cors');
 const https = require('https');
 const fs = require('fs');
+const { connectMongo } = require('./db/connect');
 
 const app = express();
-const port = 5000;
 
 const sslOptions = {
-    key: fs.readFileSync('ruta/a/server.key'),
-    cert: fs.readFileSync('ruta/a/server.cert')
+    key: fs.readFileSync('../server.key'),
+    cert: fs.readFileSync('../server.cert')
   };
 
 app.use(cors());
 app.use(json());
 
-app.get('/', (req, res) => {
-    res.send('¡Servidor HTTPS activo!');
+app.get('/', async (req, res) => {
+    try{
+        const db = await connectMongo();
+        const collection = db.collection('note');
+        const val = await collection.find({}).toArray();
+        console.log(val);
+        
+        res.status(200).json(val);
+        res.send('¡Servidor HTTPS activo!');
+    }catch{
+        console.error('Error al obtener las notas', error);
+        res.status(500).send('Error en el servidor'); 
+    }
   });
 
 // Configurar el servidor HTTPS
