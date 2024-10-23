@@ -2,27 +2,26 @@ const express = require('express');
 const cors = require('cors');
 const https = require('https');
 const fs = require('fs');
+const path = require('path');
 const { connectMongo } = require('./db/connect');
 
 const app = express();
 
 const sslOptions = {
-    key: fs.readFileSync('../server.key'),
-    cert: fs.readFileSync('../server.cert')
+    key: fs.readFileSync(path.join(__dirname, '../server.key')),
+    cert: fs.readFileSync(path.join(__dirname, '../server.cert'))
   };
 
 app.use(cors());
-app.use(json());
+app.use(express.json());
 
-app.get('/', async (req, res) => {
+app.get('/notes', async (req, res) => {
     try{
         const db = await connectMongo();
         const collection = db.collection('note');
-        const val = await collection.find({}).toArray();
+        const val = await collection.find({status: "activa"}).toArray();
         console.log(val);
-        
         res.status(200).json(val);
-        res.send('¡Servidor HTTPS activo!');
     }catch{
         console.error('Error al obtener las notas', error);
         res.status(500).send('Error en el servidor'); 
