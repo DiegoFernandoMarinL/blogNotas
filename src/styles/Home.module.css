@@ -1,3 +1,36 @@
 .section__header{
-    background: red;
+    /* background: red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
 }
+.container__icons{
+    /* background: white; */
+    width: 120px;
+    display: flex;
+    justify-content: space-around;
+}
+.section__notes{
+    background: green;
+}
+.container_note{
+    background: yellow;
+    margin: 20px;
+    border-radius: 8px;
+    padding: 0 8px 0 8px;
+    font-family: "Nunito-Regular";
+}
+.section__buttonAgregate {
+    position: fixed;  
+    bottom: 20px;
+    right: 20px;
+    width: 80px;
+   /*  background: red; */
+}
+.section__buttonAgregate img{
+    width: 100%;
+}
+  
+
+    

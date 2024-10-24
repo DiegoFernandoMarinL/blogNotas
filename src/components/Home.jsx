@@ -10,23 +10,28 @@ const Home = () => {
     <main>
         <section className={styles.section__header}>
             <h1>Notes</h1>
-            <div>
+            <div className={styles.container__icons}>
               <img src={iconsearch}></img>
               <img src={iconi}></img>
             </div>
         </section>
         <section className={styles.section__notes}>
-          <div>
-            <h2>title note</h2>
+          <div className={styles.container_note}>
+            <h3>title note</h3>
           </div>
-        </section>
-        <section>
-          <div>
-            <img src={iconAgregate}></img>
+          <div className={styles.container_note}>
+            <h3>title note</h3>
           </div>
-        </section>  
+          <div className={styles.container_note}>
+            <h3>title note</h3>
+          </div>
+        </section> 
         <section className={styles.section__buttonAgregate}>
-            <Link className={styles.link}to="/LogIn">Sign In</Link>
+          <div>
+            <Link className={styles.link} to="/LogIn">
+              <img src={iconAgregate} alt="icon" />
+            </Link>
+          </div>
         </section>
     </main>
   )
