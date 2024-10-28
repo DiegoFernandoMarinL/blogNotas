@@ -43,18 +43,18 @@ app.get('/notes/:id', async (req, res) => {
 
 //Busca notas por título o contenido.
 app.get('/notes/search/:query', async (req, res) => {
-  const text = req.params;
+  const text = req.params.query;
   console.log(text);
   try {
       const db = await connectMongo();
       const collection = db.collection('note');
       const val = await collection.find({
         $or: [
-            { title: { $regex: text.query, $options: "i" } },
-            { content: { $regex: text.query, $options: "i" } }
+            { title: { $regex: text, $options: "i" } },
+            { content: { $regex: text, $options: "i" } }
         ],
         status: "activa"
-      },{projection: {title:1, content:1}});
+      },{projection: {title:1, content:1}}).toArray();
       console.log(val);
       if (val) {
         res.status(200).json(val); 
