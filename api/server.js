@@ -20,7 +20,6 @@ app.get('/notes', async (req, res) => {
         const db = await connectMongo();
         const collection = db.collection('note');
         const val = await collection.find({status: "activa"}).toArray();
-        console.log(val);
         res.status(200).json(val);
     }catch{
         console.error('Error al obtener las notas', error);
@@ -43,18 +42,20 @@ app.get('/notes/:id', async (req, res) => {
 });
 
 //Busca notas por título o contenido.
-app.get('/notes/search', async (req, res) => {
-  const text = req.body;
+app.get('/notes/search/:query', async (req, res) => {
+  const text = req.params;
+  console.log(text);
   try {
       const db = await connectMongo();
       const collection = db.collection('note');
-      const val = await collection.findOne({
+      const val = await collection.find({
         $or: [
-            { title: { $regex: text, $options: "i" } },
-            { content: { $regex: text, $options: "i" } }
+            { title: { $regex: text.query, $options: "i" } },
+            { content: { $regex: text.query, $options: "i" } }
         ],
         status: "activa"
       },{projection: {title:1, content:1}});
+      console.log(val);
       if (val) {
         res.status(200).json(val); 
       } else {
