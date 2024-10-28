@@ -1,0 +1,7 @@
+.noteOpenDiv {
+    width: 90%;
+    height: 90%;
+    margin-left: 5%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
