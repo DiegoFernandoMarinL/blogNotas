@@ -5,6 +5,7 @@ import fs from 'fs'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: 'https://diegofernandomarinl.github.io/blogNotas/',
   server: {
     https: {
       key: fs.readFileSync('./server.key'),  // Ajusta la ruta a tu archivo .key
