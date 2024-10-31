@@ -1,16 +1,16 @@
 const express = require('express');
 const cors = require('cors');
-const https = require('https');
-const fs = require('fs');
+/* const https = require('https');
+const fs = require('fs'); */
 const path = require('path');
 const { connectMongo } = require('./db/connect');
 
 const app = express();
 
-const sslOptions = {
+/* const sslOptions = {
     key: fs.readFileSync(path.join(__dirname, '../server.key')),
     cert: fs.readFileSync(path.join(__dirname, '../server.cert'))
-  };
+  }; */
 
 app.use(cors());
 app.use(express.json());
@@ -66,7 +66,7 @@ app.get('/notes/search/:query', async (req, res) => {
       res.status(500).json({ valido: false, mensaje: 'Error en el servidor' });
   }
 });
-// Configurar el servidor HTTPS
-https.createServer(sslOptions, app).listen(3443, () => {
-    console.log('Servidor HTTPS escuchando en el puerto 3443');
-  });
+// Configurar el servidor HTTP
+app.listen(() => {
+  console.log("Server running on http://localhost:3000");
+});
