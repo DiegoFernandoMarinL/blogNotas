@@ -14,7 +14,7 @@ const Home = () => {
   useEffect(() => {
     const fetchNotas = async () => {
       try {
-        const response = await fetch('https://blog-notas-psi.vercel.app//notes');
+        const response = await fetch('https://blog-notas-psi.vercel.app/notes');
         const data = await response.json(); 
         setnotas(data);             
       } catch (error) {
@@ -30,7 +30,7 @@ const Home = () => {
       const fetchFilteredNotas = async () => {
         try {
           // Envía la consulta por parámetros
-          const response = await fetch(`https://blog-notas-psi.vercel.app//notes/search/${searchQuery}`);
+          const response = await fetch(`https://blog-notas-psi.vercel.app/notes/search/${searchQuery}`);
           const data = await response.json();
           console.log(data)
           setnotas(data); // Actualiza las notas según la búsqueda
